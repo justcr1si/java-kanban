@@ -1,14 +1,19 @@
 public class Main {
     public static void main(String[] args) {
-        Epic epic = new Epic("Проверка", "Проверка", TaskStatus.IN_PROGRESS);
         TaskManager taskManager = new TaskManager();
-        epic.addSubTask(new SubTask("Проверка", "Проверка", TaskStatus.DONE, epic.getId()));
-        epic.addSubTask(new SubTask("Проверка", "Проверка", TaskStatus.DONE, epic.getId()));
-        taskManager.createOrUpdateTask(epic);
-        taskManager.createOrUpdateTask(epic.getSubTasks().get(0));
-        taskManager.createOrUpdateTask(epic.getSubTasks().get(1));
-        System.out.println(taskManager.getAllTasksArrayList());
-        taskManager.deleteTaskById(2);
-        System.out.println(((Epic) taskManager.getTaskById(1)).getSubTasks());
+        Epic epic = new Epic("Ужин", "Приготовить ужин", TaskStatus.NEW);
+        taskManager.createEpic(epic);
+        SubTask subTask = new SubTask("Рыба", "Взять рыбу", TaskStatus.IN_PROGRESS, epic.getId());
+        taskManager.createSubTask(subTask);
+        Epic epic1 = new Epic("Новый эпик", "Эпик", TaskStatus.NEW);
+        taskManager.updateEpic(epic1);
+        taskManager.updateSubTask(subTask);
+        epic1.setId(1); // ставим тот же айдишник для замены
+        SubTask subTask1 = new SubTask("Тест", "Тест", TaskStatus.DONE, epic1.getId());
+        taskManager.createSubTask(subTask1);
+        epic1.getSubTasks().add(subTask1);
+        taskManager.deleteAllEpics();
+        System.out.println(taskManager.getAllSubTasks());
+        System.out.println(taskManager.getAllEpics());
     }
 }

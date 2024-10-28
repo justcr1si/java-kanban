@@ -3,13 +3,12 @@ import java.util.Objects;
 public class Task {
     private final String name;
     private final String description;
-    private final int id;
+    private int id; // В TaskManager будет присваиваться айдишник. В update он также будет использоваться для замены объектов
     private TaskStatus taskStatus;
 
     public Task(String name, String description, TaskStatus taskStatus) {
         this.name = name;
         this.description = description;
-        this.id = TaskManager.getCounter();
         this.taskStatus = taskStatus;
     }
 
@@ -31,6 +30,10 @@ public class Task {
 
     public void setTaskStatus(TaskStatus taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
