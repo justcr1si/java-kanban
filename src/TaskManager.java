@@ -26,6 +26,10 @@ public class TaskManager {
         return new ArrayList<>(epicTaskList.values());
     }
 
+    public ArrayList<SubTask> getAllSubTasksByEpic(Epic epic) {
+        return new ArrayList<>(epic.getSubTasks());
+    }
+
     public void deleteAllTasks() {
         tasksList.clear();
     }
@@ -75,7 +79,7 @@ public class TaskManager {
                 return epic;
             }
         }
-        throw new IllegalArgumentException("SubTask with id " + id + " not found");
+        throw new IllegalArgumentException("Epic with id " + id + " not found");
     }
 
     public void createTask(Task task) {
